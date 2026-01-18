@@ -11,10 +11,10 @@ import projectImg1 from "../assets/images/Westwoodimg.webp";
 import projectImg2 from "../assets/images/Veranoimg.webp";
 import projectImg3 from "../assets/images/Hudsonimg.webp";
 import projectImg4 from "../assets/images/Bellevueimg.webp";
-import processIcon1 from "../assets/images/processIcon1.svg";
-// import processIcon2 from "../assets/images/processIcon2.svg";
-import processIcon3 from "../assets/images/processIcon3.svg";
-import processIcon4 from "../assets/images/processIcon4.svg";
+import processIcon1 from "../assets/images/support.png";
+import processIcon2 from "../assets/images/bulb.png";
+import processIcon3 from "../assets/images/dimond.png";
+import processIcon4 from "../assets/images/shuffle.png";
 
 import TestimonialSlider from "./TestimonialSwiper";
 
@@ -90,7 +90,7 @@ const Home = () => {
     },
     {
       id: 2,
-      img: processIcon1,
+      img: processIcon2,
       heading: "Concept & Planning",
       text: "Our team creates mood boards, layouts, and design concepts tailored to your vision.",
     },
