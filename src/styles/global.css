@@ -390,14 +390,16 @@ img {
 }
 
 
-.socialLinkBox{
+.socialLinkBox {
   display: flex;
   gap: 16px;
 }
-.socialLink{
+
+.socialLink {
   font-size: 25px;
 }
-.processHeadingBox{
+
+.processHeadingBox {
   max-width: 826px;
 }
 
@@ -513,7 +515,12 @@ img {
   .processBoxWrapper {
     margin-top: 45px;
   }
-  .serviceCardContentBox{
+
+  .serviceCardContentBox {
     gap: 8px;
+  }
+
+  .aboutBtn {
+    margin: 32px 0 40px;
   }
 }
