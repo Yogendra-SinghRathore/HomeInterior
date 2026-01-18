@@ -168,8 +168,8 @@ const Home = () => {
               </NavLink>
             </div>
 
-            <div className="row g-5">
-              <div className="col-lg-5">
+            <div className="row g-4">
+              <div className="col-lg-4 mt-2 mt-sm-5">
                 <div className="counterBox">
                   <div className="counterInnerBox">
                     <h2>60M+</h2>
@@ -217,13 +217,13 @@ const Home = () => {
           </div>
 
           {serviceCard.map((service) => (
-            <div className="row g-5 serviceBox">
-              <div className="col-lg-5">
+            <div className="row g-4 serviceBox">
+              <div className="col-lg-4">
                 <div>
                   <img className=" img-fluid" src={service.img} alt="" />
                 </div>
               </div>
-              <div className="col-lg-7">
+              <div className="col-lg-7 mt-3 mt-sm-5">
                 <div className="serviceCardContentBox">
                   <span className="serviceNumber">{service.number}</span>
                   <h2 className="serviceHeading">{service.heading}</h2>
@@ -291,7 +291,7 @@ const Home = () => {
           </div>
 
           <div className="serviceHeader">
-            <div className="serviceHeadingBox">
+            <div className="serviceHeadingBox processHeadingBox">
               <h1>Where your vision and our expertise come together.</h1>
             </div>
             <div className=" serviceBtnBox">

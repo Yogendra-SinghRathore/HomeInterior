@@ -397,6 +397,9 @@ img {
 .socialLink{
   font-size: 25px;
 }
+.processHeadingBox{
+  max-width: 826px;
+}
 
 
 @media (max-width: 992px) {
@@ -509,5 +512,8 @@ img {
 
   .processBoxWrapper {
     margin-top: 45px;
+  }
+  .serviceCardContentBox{
+    gap: 8px;
   }
 }
