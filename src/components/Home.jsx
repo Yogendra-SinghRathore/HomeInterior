@@ -15,7 +15,6 @@ import processIcon1 from "../assets/images/processIcon1.svg";
 import processIcon2 from "../assets/images/processIcon2.svg";
 import processIcon3 from "../assets/images/processIcon3.svg";
 import processIcon4 from "../assets/images/processIcon4.svg";
-import footerImg from "../assets/images/footerImg.jpg"
 
 import TestimonialSlider from "./TestimonialSwiper";
 
@@ -128,7 +127,7 @@ const Home = () => {
                   src={heroImage1}
                   alt="hero Image 1"
                 />
-              </div>
+              </div> 
             </div>
             <div className="col-md-3 mt-4 mt-md-0">
               <div className="heroRightBox">
