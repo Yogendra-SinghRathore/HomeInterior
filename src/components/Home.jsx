@@ -170,7 +170,7 @@ const Home = () => {
               ease: "power4.out",
               scrollTrigger: {
                 trigger: image,
-                start: isMobile ? "top 30%" : "top 80%",
+                start: isMobile ? "top 70%" : "top 80%",
                 once: true,
                 invalidateOnRefresh: true,
               },
@@ -210,7 +210,7 @@ const Home = () => {
             stagger: 0.045,
             scrollTrigger: {
               trigger: el,
-              start: isMobile ? "top 30%" : "top 75%",
+              start: isMobile ? "top 65%" : "top 75%",
               once: true,
               invalidateOnRefresh: true,
             },
@@ -235,7 +235,7 @@ const Home = () => {
                 >
                   <div className="section-icon"></div>
                   <div className="section-title">
-                    We  Your Sustainable Lifestyle
+                    We Build Your Sustainable Lifestyle
                   </div>
                 </div>
                 <h1 className="hero-title reveal-brush">
