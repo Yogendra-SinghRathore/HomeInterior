@@ -3,6 +3,10 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+ScrollTrigger.config({
+  ignoreMobileResize: true,
+});
+
 gsap.registerPlugin(ScrollTrigger);
 
 import { NavLink } from "react-router-dom";
@@ -115,104 +119,106 @@ const Home = () => {
   ];
 
 
-const splitToCharsByWord = (element) => {
-  const text = element.innerText;
-  const words = text.split(" ");
+  const splitToCharsByWord = (element) => {
+    const text = element.innerText;
+    const words = text.split(" ");
 
-  element.innerHTML = "";
+    element.innerHTML = "";
 
-  words.forEach((word) => {
-    const wordSpan = document.createElement("span");
-    wordSpan.className = "word";
+    words.forEach((word) => {
+      const wordSpan = document.createElement("span");
+      wordSpan.className = "word";
 
-    word.split("").forEach((char) => {
-      const charSpan = document.createElement("span");
-      charSpan.className = "char";
-      charSpan.textContent = char;
-      wordSpan.appendChild(charSpan);
+      word.split("").forEach((char) => {
+        const charSpan = document.createElement("span");
+        charSpan.className = "char";
+        charSpan.textContent = char;
+        wordSpan.appendChild(charSpan);
+      });
+
+      element.appendChild(wordSpan);
     });
-
-    element.appendChild(wordSpan);
-  });
-};
+  };
 
 
 
 
-useEffect(() => {
-  const images = gsap.utils.toArray(".reveal-image");
+  useEffect(() => {
+    const images = gsap.utils.toArray(".reveal-image");
 
-  images.forEach((image) => {
-    const img = image.querySelector("img");
+    images.forEach((image) => {
+      const img = image.querySelector("img");
 
-    gsap.matchMedia().add(
-      {
-        isMobile: "(max-width: 768px)",
-        isDesktop: "(min-width: 769px)",
-      },
-      (context) => {
-        const { isMobile } = context.conditions;
+      gsap.matchMedia().add(
+        {
+          isMobile: "(max-width: 768px)",
+          isDesktop: "(min-width: 769px)",
+        },
+        (context) => {
+          const { isMobile } = context.conditions;
 
-        gsap.fromTo(
-          img,
-          {
-            clipPath: "inset(0 0 100% 0)",
-            scale: 2, // start zoomed IN
-          },
-          {
-            clipPath: "inset(0 0 0% 0)",
-            scale: 1, // zoom OUT
-            duration: 1.8,
-            ease: "cubic-bezier(0.77,0,0.175,1)",
-            scrollTrigger: {
-              trigger: image,
-              start: isMobile ? "top 30%" : "top 75%",
-              once: true,
+          gsap.fromTo(
+            img,
+            {
+              clipPath: "inset(0 0 100% 0)",
+              scale: isMobile ? 1.3 : 2,
             },
-          }
-        );
-      }
-    );
-  });
-}, []);
+            {
+              clipPath: "inset(0 0 0% 0)",
+              scale: 1,
+              duration: isMobile ? 1.2 : 1.8,
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: image,
+                start: isMobile ? "top 75%" : "top 80%",
+                once: true,
+                invalidateOnRefresh: true, // 🔥 important
+              },
+            }
+          );
+        }
+      );
+    });
+  }, []);
 
 
-useEffect(() => {
-  const elements = document.querySelectorAll(".reveal-brush");
+  useEffect(() => {
+    const elements = document.querySelectorAll(".reveal-brush");
 
-  elements.forEach((el) => {
-    if (el.dataset.split === "true") return;
-    el.dataset.split = "true";
+    elements.forEach((el) => {
+      if (el.dataset.split === "true") return;
+      el.dataset.split = "true";
 
-    splitToCharsByWord(el);
+      splitToCharsByWord(el);
 
-    const chars = el.querySelectorAll(".char");
+      const chars = el.querySelectorAll(".char");
 
-    gsap.matchMedia().add(
-      {
-        isMobile: "(max-width: 768px)",
-        isDesktop: "(min-width: 769px)",
-      },
-      (context) => {
-        const { isMobile } = context.conditions;
+      gsap.matchMedia().add(
+        {
+          isMobile: "(max-width: 768px)",
+          isDesktop: "(min-width: 769px)",
+        },
+        (context) => {
+          const { isMobile } = context.conditions;
 
-        gsap.to(chars, {
-          opacity: 1,
-          x: 0,
-          filter: "blur(0px)",
-          duration: 0.45,
-          ease: "power2.out",
-          stagger: 0.045,
-          scrollTrigger: {
-            trigger: el,
-            start: isMobile ? "top 30%" : "top 75%",
-            once: true,
-          },
-        });
-      }
-    );
-  });
-}, []);
+          gsap.to(chars, {
+            opacity: 1,
+            x: 0,
+            filter: "blur(0px)",
+            duration: 0.45,
+            ease: "power2.out",
+            stagger: 0.045,
+            scrollTrigger: {
+              trigger: el,
+              start: isMobile ? "top 85%" : "top 75%",
+              once: true,
+              invalidateOnRefresh: true,
+            },
+          });
+        }
+      );
+    });
+  }, []);
 
 
   return (
