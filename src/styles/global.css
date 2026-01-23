@@ -37,12 +37,9 @@ a {
   height: 75px;
 }
 
+
 .navbarBorder {
-  padding-bottom: 10px;
   border-bottom: 1px solid gainsboro;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 }
 
 .navbar-nav {
@@ -178,7 +175,7 @@ img {
 }
 
 .serviceHeadingBox {
-  max-width: 621px;
+  max-width: 660px;
 }
 
 .serviceHeadingBox h1 {
@@ -193,7 +190,7 @@ img {
 .serviceCardContentBox {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
 }
 
 .serviceNumber {
@@ -305,9 +302,8 @@ img {
   font-size: 4em;
 }
 
-.primary-button,
-.secondry-button {
-  padding: 11px 54px;
+.primary-button{
+  padding: 11px 24px;
   border: 1px solid #000;
   background: #000;
   color: #fff;
@@ -315,6 +311,19 @@ img {
   align-items: center;
   justify-content: center;
 }
+.secondry-button{
+  padding: 11px 24px;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbarBtn{
+  padding: 11px 54px;
+}
+
 
 .secondry-button {
   padding: 11px 24px;
@@ -402,6 +411,36 @@ img {
 .processHeadingBox {
   max-width: 826px;
 }
+
+/* Gsap */
+
+.reveal-image {
+  overflow: hidden;
+}
+
+.reveal-image img {
+  width: 100%;
+  display: block;
+}
+
+.reveal-brush {
+  overflow: hidden;
+}
+
+.reveal-brush .word {
+  display: inline-block;
+  white-space: nowrap; /* 🔥 KEY LINE */
+}
+
+.reveal-brush .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-0.4em);
+}
+
+
+
+
 
 
 @media (max-width: 992px) {
@@ -510,7 +549,7 @@ img {
 
   .section {
     padding: 20px 0;
-  }
+  }     
 
   .processBoxWrapper {
     margin-top: 45px;
@@ -537,5 +576,8 @@ img {
 
   .processBox img {
     width: 45px;
+  }
+  .serviceDetails{
+    font-size: 14px;
   }
 }

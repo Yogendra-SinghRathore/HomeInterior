@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top bg-white navbar-light mb-3">
-      <div className="container bg-white">
+      <div className="container bg-white navbarBorder">
 
         {/* Logo */}
         <NavLink className="navbar-brand fw-bold" to="/hero">
@@ -114,10 +114,10 @@ const Navbar = () => {
           </ul>
 
           {/* Right CTA */}
-          <div className="ms-lg-auto">
+          <div className="">
             <NavLink
               to="/quote"
-              className="primary-button"
+              className="primary-button navbarBtn"
               data-bs-toggle="collapse"
               data-bs-target="#navbarScroll"
             >
@@ -127,8 +127,8 @@ const Navbar = () => {
 
         </div>
 
-        <div className="navbarBorder d-none"></div>
-      </div>
+        
+        </div>
     </nav>
   );
 };

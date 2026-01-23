@@ -1,4 +1,10 @@
 import React from "react";
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 import { NavLink } from "react-router-dom";
 import heroImage1 from "../assets/images/heroImage1.jpg";
 import heroImage2 from "../assets/images/heroImage2.jpg";
@@ -108,6 +114,90 @@ const Home = () => {
     },
   ];
 
+
+  const splitToCharsByWord = (element) => {
+    const words = element.innerText.split(" ");
+    element.innerHTML = "";
+
+    words.forEach((word, wordIndex) => {
+      const wordSpan = document.createElement("span");
+      wordSpan.className = "word";
+
+      word.split("").forEach((char) => {
+        const charSpan = document.createElement("span");
+        charSpan.className = "char";
+        charSpan.textContent = char;
+        wordSpan.appendChild(charSpan);
+      });
+
+      element.appendChild(wordSpan);
+
+      // add space between words (except last)
+      if (wordIndex < words.length - 1) {
+        element.appendChild(document.createTextNode(" "));
+      }
+    });
+  };
+
+
+
+  useEffect(() => {
+    const images = gsap.utils.toArray(".reveal-image");
+
+    images.forEach((image) => {
+      const img = image.querySelector("img");
+
+      gsap.fromTo(
+        img,
+        {
+          clipPath: "inset(0 0 100% 0)",
+          scale: 2,           // 👈 start zoomed IN
+        },
+        {
+          clipPath: "inset(0 0 0% 0)",
+          scale: 1,              // 👈 zoom OUT to normal
+          duration: 1.8,
+          ease: "cubic-bezier(0.77,0,0.175,1)",
+          scrollTrigger: {
+            trigger: image,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+    });
+  }, []);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll(".reveal-brush");
+
+    elements.forEach((el) => {
+      splitToCharsByWord(el);
+
+      const chars = el.querySelectorAll(".char");
+
+      gsap.to(chars, {
+        opacity: 1,
+        x: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        stagger: {
+          each: 0.035,
+          from: "start",
+        },
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+          once: true,
+        },
+      });
+    });
+  }, []);
+
+
+
+
+
   return (
     <>
       <section id="hero" className="section hero-section">
@@ -115,28 +205,39 @@ const Home = () => {
           <div className="row gx-0">
             <div className="col-md-9">
               <div className="heroLeftBox ">
-                <div className=" section-title-box" data-aos="fade-down" data-aos-delay="500">
+                <div
+                  className=" section-title-box"
+                  data-aos="fade-down"
+                  data-aos-delay="500"
+                >
                   <div className="section-icon"></div>
                   <div className="section-title">
                     We Build Your Sustainable Lifestyle
                   </div>
                 </div>
-                <h1 className="hero-title" data-aos="fade-up">INTERIOR FOR HOME</h1>
-                <img
-                  className=" img-fluid" data-aos="fade-up"
-                  src={heroImage1}
-                  alt="hero Image 1"
-                />
-              </div> 
+                <h1 className="hero-title reveal-brush">
+                  INTERIOR FOR HOME
+                </h1>
+
+                <div className="reveal-image">
+                  <img
+                    className="img-fluid"
+                    src={heroImage1}
+                    alt="hero Image 1"
+                  />
+                </div>
+              </div>
             </div>
             <div className="col-md-3 mt-4 mt-md-0">
               <div className="heroRightBox">
-                <img
-                  className=" img-fluid"
-                  data-aos="fade-down"
-                  src={heroImage2}
-                  alt="hero Image 2"
-                />
+                <div className="reveal-image">
+                  <img
+                    className="img-fluid"
+                    src={heroImage2}
+                    alt="hero Image 2"
+                  />
+                </div>
+
                 <p className="mb-0" data-aos="fade-up" data-aos-delay="500">
                   Crafting interiors that showcase your individuality, elevate
                   your lifestyle, and infuse timeless beauty into every space.
@@ -155,7 +256,7 @@ const Home = () => {
             <div className="liner-box"></div>
           </div>
           <div className="about-box about-inner-box">
-            <h2 className=" aboutDesc">
+            <h2 className=" aboutDesc" data-aos="fade-up" data-aos-delay="1000">
               In 2010, a passionate team of designers founded Aurelo with a
               simple mission to transform bold visions into timeless
               interiors.We’re known for more than just designing spaces. we
@@ -163,7 +264,7 @@ const Home = () => {
             </h2>
 
             <div>
-              <NavLink to="/quote" className="secondry-button aboutBtn">
+              <NavLink to="/quote" className="primary-button aboutBtn">
                 Book Appoinment
               </NavLink>
             </div>
@@ -189,7 +290,13 @@ const Home = () => {
               </div>
               <div className="col-lg-7">
                 <div className="counterSideImg">
-                  <img className=" img-fluid" src={counterSideImage} alt="" />
+                  <div className="reveal-image">
+                    <img
+                      className="img-fluid"
+                      src={counterSideImage}
+                      alt="counter Side Image"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -206,11 +313,11 @@ const Home = () => {
           </div>
 
           <div className="serviceHeader">
-            <div className="serviceHeadingBox">
-              <h1>Discover our interior design solutions.</h1>
+            <div className="serviceHeadingBox ">
+              <h1 className="reveal-brush">Discover our interior design solutions.</h1>
             </div>
             <div className=" serviceBtnBox">
-              <NavLink to="/quote" className="secondry-button">
+              <NavLink to="/quote" className="primary-button">
                 Book Appoinment
               </NavLink>
             </div>
@@ -219,11 +326,15 @@ const Home = () => {
           {serviceCard.map((service) => (
             <div className="row g-4 serviceBox">
               <div className="col-lg-4">
-                <div>
-                  <img className=" img-fluid" src={service.img} alt="" />
+                <div className="reveal-image">
+                  <img
+                    className="img-fluid"
+                    src={service.img}
+                    alt="hero Image 1"
+                  />
                 </div>
               </div>
-              <div className="col-lg-7 mt-3 mt-sm-5">
+              <div className="col-lg-7 mt-3">
                 <div className="serviceCardContentBox">
                   <span className="serviceNumber">{service.number}</span>
                   <h2 className="serviceHeading">{service.heading}</h2>
@@ -250,10 +361,10 @@ const Home = () => {
 
           <div className="serviceHeader">
             <div className="serviceHeadingBox">
-              <h1>A showcase of timeless interiors.</h1>
+              <h1 className="reveal-brush">A showcase of timeless interiors.</h1>
             </div>
             <div className=" serviceBtnBox">
-              <NavLink to="/quote" className="secondry-button">
+              <NavLink to="/quote" className="primary-button">
                 Book Appoinment
               </NavLink>
             </div>
@@ -292,10 +403,10 @@ const Home = () => {
 
           <div className="serviceHeader">
             <div className="serviceHeadingBox processHeadingBox">
-              <h1>Where your vision and our expertise come together.</h1>
+              <h1 className="reveal-brush">Where your vision and our expertise come together.</h1>
             </div>
             <div className=" serviceBtnBox">
-              <NavLink to="/quote" className="secondry-button">
+              <NavLink to="/quote" className="primary-button">
                 Book Appoinment
               </NavLink>
             </div>
@@ -331,7 +442,7 @@ const Home = () => {
 
           <div className="serviceHeader">
             <div className="serviceHeadingBox">
-              <h1>What our customers say.</h1>
+              <h1 className="reveal-brush">What our customers say.</h1>
             </div>
           </div>
           <TestimonialSlider />
@@ -342,12 +453,12 @@ const Home = () => {
         <div className="container-fluid gx-0">
           <div className="offerBox">
             <div className="container offerBoxText">
-              <h1>Ready to redefine your space? let’s talk</h1>
+              <h1 className="reveal-brush">Ready to redefine your space? let’s talk</h1>
               <div className=" serviceBtnBox">
-              <NavLink to="/quote" className="secondry-button offerBoxBtn">
-                Book Appoinment
-              </NavLink>
-            </div>
+                <NavLink to="/quote" className="secondry-button offerBoxBtn">
+                  Book Appoinment
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
