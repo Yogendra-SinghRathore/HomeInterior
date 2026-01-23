@@ -143,43 +143,36 @@ const Home = () => {
 
 
 
-  useEffect(() => {
-    const images = gsap.utils.toArray(".reveal-image");
+ useEffect(() => {
+  ScrollTrigger.batch(".reveal-image", {
+    start: "top 80%",
+    once: true,
+    invalidateOnRefresh: true,
 
-    images.forEach((image) => {
-      const img = image.querySelector("img");
+    onEnter: (batch) => {
+      batch.forEach((image) => {
+        const img = image.querySelector("img");
 
-      gsap.matchMedia().add(
-        {
-          isMobile: "(max-width: 768px)",
-          isDesktop: "(min-width: 769px)",
-        },
-        (context) => {
-          const { isMobile } = context.conditions;
+        gsap.fromTo(
+          img,
+          {
+            clipPath: "inset(0 0 100% 0)",
+            scale: 1.3,
+          },
+          {
+            clipPath: "inset(0 0 0% 0)",
+            scale: 1,
+            duration: 1.2,
+            ease: "power4.out",
+          }
+        );
+      });
+    },
+  });
 
-          gsap.fromTo(
-            img,
-            {
-              clipPath: "inset(0 0 100% 0)",
-              scale: isMobile ? 1.3 : 2,
-            },
-            {
-              clipPath: "inset(0 0 0% 0)",
-              scale: 1,
-              duration: isMobile ? 1.2 : 1.8,
-              ease: "power4.out",
-              scrollTrigger: {
-                trigger: image,
-                start: isMobile ? "top 75%" : "top 80%",
-                once: true,
-                invalidateOnRefresh: true, // 🔥 important
-              },
-            }
-          );
-        }
-      );
-    });
-  }, []);
+  ScrollTrigger.refresh();
+}, []);
+
 
 
   useEffect(() => {
