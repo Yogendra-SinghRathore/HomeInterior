@@ -143,36 +143,43 @@ const Home = () => {
 
 
 
- useEffect(() => {
-  ScrollTrigger.batch(".reveal-image", {
-    start: "top 80%",
-    once: true,
-    invalidateOnRefresh: true,
+  useEffect(() => {
+    const images = gsap.utils.toArray(".reveal-image");
 
-    onEnter: (batch) => {
-      batch.forEach((image) => {
-        const img = image.querySelector("img");
+    images.forEach((image) => {
+      const img = image.querySelector("img");
 
-        gsap.fromTo(
-          img,
-          {
-            clipPath: "inset(0 0 100% 0)",
-            scale: 1.3,
-          },
-          {
-            clipPath: "inset(0 0 0% 0)",
-            scale: 1,
-            duration: 1.2,
-            ease: "power4.out",
-          }
-        );
-      });
-    },
-  });
+      gsap.matchMedia().add(
+        {
+          isMobile: "(max-width: 768px)",
+          isDesktop: "(min-width: 769px)",
+        },
+        (context) => {
+          const { isMobile } = context.conditions;
 
-  ScrollTrigger.refresh();
-}, []);
-
+          gsap.fromTo(
+            img,
+            {
+              clipPath: "inset(0 0 100% 0)",
+              scale: isMobile ? 1.3 : 2,
+            },
+            {
+              clipPath: "inset(0 0 0% 0)",
+              scale: 1,
+              duration: isMobile ? 1.2 : 1.8,
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: image,
+                start: isMobile ? "top 30%" : "top 80%",
+                once: true,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+        }
+      );
+    });
+  }, []);
 
 
   useEffect(() => {
@@ -203,7 +210,7 @@ const Home = () => {
             stagger: 0.045,
             scrollTrigger: {
               trigger: el,
-              start: isMobile ? "top 85%" : "top 75%",
+              start: isMobile ? "top 30%" : "top 75%",
               once: true,
               invalidateOnRefresh: true,
             },
@@ -228,7 +235,7 @@ const Home = () => {
                 >
                   <div className="section-icon"></div>
                   <div className="section-title">
-                    We Build Your Sustainable Lifestyle
+                    We  Your Sustainable Lifestyle
                   </div>
                 </div>
                 <h1 className="hero-title reveal-brush">
