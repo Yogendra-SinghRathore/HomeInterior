@@ -115,63 +115,75 @@ const Home = () => {
   ];
 
 
-  const splitToCharsByWord = (element) => {
-    const words = element.innerText.split(" ");
-    element.innerHTML = "";
+const splitToCharsByWord = (element) => {
+  const text = element.innerText;
+  const words = text.split(" ");
 
-    words.forEach((word, wordIndex) => {
-      const wordSpan = document.createElement("span");
-      wordSpan.className = "word";
+  element.innerHTML = "";
 
-      word.split("").forEach((char) => {
-        const charSpan = document.createElement("span");
-        charSpan.className = "char";
-        charSpan.textContent = char;
-        wordSpan.appendChild(charSpan);
-      });
+  words.forEach((word) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "word";
 
-      element.appendChild(wordSpan);
-
-      // add space between words (except last)
-      if (wordIndex < words.length - 1) {
-        element.appendChild(document.createTextNode(" "));
-      }
+    word.split("").forEach((char) => {
+      const charSpan = document.createElement("span");
+      charSpan.className = "char";
+      charSpan.textContent = char;
+      wordSpan.appendChild(charSpan);
     });
-  };
+
+    element.appendChild(wordSpan);
+  });
+};
 
 
 
-  useEffect(() => {
-    const images = gsap.utils.toArray(".reveal-image");
 
-    images.forEach((image) => {
-      const img = image.querySelector("img");
+useEffect(() => {
+  const images = gsap.utils.toArray(".reveal-image");
 
-      gsap.fromTo(
-        img,
-        {
-          clipPath: "inset(0 0 100% 0)",
-          scale: 2,           // 👈 start zoomed IN
-        },
-        {
-          clipPath: "inset(0 0 0% 0)",
-          scale: 1,              // 👈 zoom OUT to normal
-          duration: 1.8,
-          ease: "cubic-bezier(0.77,0,0.175,1)",
-          scrollTrigger: {
-            trigger: image,
-            start: "top 85%",
-            once: true,
+  images.forEach((image) => {
+    const img = image.querySelector("img");
+
+    gsap.matchMedia().add(
+      {
+        isMobile: "(max-width: 768px)",
+        isDesktop: "(min-width: 769px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions;
+
+        gsap.fromTo(
+          img,
+          {
+            clipPath: "inset(0 0 100% 0)",
+            scale: 2, // start zoomed IN
           },
-        }
-      );
-    });
-  }, []);
+          {
+            clipPath: "inset(0 0 0% 0)",
+            scale: 1, // zoom OUT
+            duration: 1.8,
+            ease: "cubic-bezier(0.77,0,0.175,1)",
+            scrollTrigger: {
+              trigger: image,
+              start: isMobile ? "top 60%" : "top 75%",
+              once: true,
+            },
+          }
+        );
+      }
+    );
+  });
+}, []);
+
 
 useEffect(() => {
   const elements = document.querySelectorAll(".reveal-brush");
 
   elements.forEach((el) => {
+    if (el.dataset.split === "true") return;
+    el.dataset.split = "true";
+
     splitToCharsByWord(el);
 
     const chars = el.querySelectorAll(".char");
@@ -187,12 +199,13 @@ useEffect(() => {
         gsap.to(chars, {
           opacity: 1,
           x: 0,
+          filter: "blur(0px)",
           duration: 0.45,
           ease: "power2.out",
-          stagger: 0.035,
+          stagger: 0.045,
           scrollTrigger: {
             trigger: el,
-            start: isMobile ? "top 92%" : "top 80%", // 👈 KEY FIX
+            start: isMobile ? "top 60%" : "top 75%",
             once: true,
           },
         });
@@ -200,10 +213,6 @@ useEffect(() => {
     );
   });
 }, []);
-
-
-
-
 
 
   return (
