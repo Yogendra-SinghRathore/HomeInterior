@@ -1,8 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useEffect } from "react";
 
 import "swiper/css";
 import "swiper/css/navigation";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import testimonialImg1 from "../assets/images/testimonialimg1.jpg";
 import testimonialImg2 from "../assets/images/testimonialimg2.jpg";
@@ -32,6 +36,44 @@ const TestimonialSlider = () => {
       img: testimonialImg3,
     },
   ];
+
+  useEffect(() => {
+    const images = gsap.utils.toArray(".reveal-image");
+
+    images.forEach((image) => {
+      const img = image.querySelector("img");
+
+      gsap.matchMedia().add(
+        {
+          isMobile: "(max-width: 768px)",
+          isDesktop: "(min-width: 769px)",
+        },
+        (context) => {
+          const { isMobile } = context.conditions;
+
+          gsap.fromTo(
+            img,
+            {
+              clipPath: "inset(0 0 100% 0)",
+              scale: isMobile ? 1.3 : 1.8,
+            },
+            {
+              clipPath: "inset(0 0 0% 0)",
+              scale: 1,
+              duration: isMobile ? 1.2 : 2,
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: image,
+                start: isMobile ? "top 70%" : "top 80%",
+                once: true,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+        }
+      );
+    });
+  }, []);
 
   return (
     <div className="testimonialWrapper">
@@ -70,12 +112,14 @@ const TestimonialSlider = () => {
 
               <div className="col-md-6">
                 <div className="testimonialCardImg">
-                  <img
-                    className="img-fluid"
-                    src={item.img}
-                    alt={item.name}
-                    loading="lazy"
-                  />
+                  <div className="reveal-image">
+                    <img
+                      className="img-fluid"
+                      src={item.img}
+                      alt={item.name}
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
