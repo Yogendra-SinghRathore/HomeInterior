@@ -168,31 +168,40 @@ const Home = () => {
     });
   }, []);
 
-  useEffect(() => {
-    const elements = document.querySelectorAll(".reveal-brush");
+useEffect(() => {
+  const elements = document.querySelectorAll(".reveal-brush");
 
-    elements.forEach((el) => {
-      splitToCharsByWord(el);
+  elements.forEach((el) => {
+    splitToCharsByWord(el);
 
-      const chars = el.querySelectorAll(".char");
+    const chars = el.querySelectorAll(".char");
 
-      gsap.to(chars, {
-        opacity: 1,
-        x: 0,
-        duration: 0.7,
-        ease: "power2.out",
-        stagger: {
-          each: 0.035,
-          from: "start",
-        },
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          once: true,
-        },
-      });
-    });
-  }, []);
+    gsap.matchMedia().add(
+      {
+        isMobile: "(max-width: 768px)",
+        isDesktop: "(min-width: 769px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions;
+
+        gsap.to(chars, {
+          opacity: 1,
+          x: 0,
+          duration: 0.45,
+          ease: "power2.out",
+          stagger: 0.035,
+          scrollTrigger: {
+            trigger: el,
+            start: isMobile ? "top 92%" : "top 80%", // 👈 KEY FIX
+            once: true,
+            
+          },
+        });
+      }
+    );
+  });
+}, []);
+
 
 
 
