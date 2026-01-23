@@ -161,12 +161,12 @@ const Home = () => {
             img,
             {
               clipPath: "inset(0 0 100% 0)",
-              scale: isMobile ? 1.3 : 2,
+              scale: isMobile ? 1.3 : 1.8,
             },
             {
               clipPath: "inset(0 0 0% 0)",
               scale: 1,
-              duration: isMobile ? 1.2 : 1.8,
+              duration: isMobile ? 1.2 : 2,
               ease: "power4.out",
               scrollTrigger: {
                 trigger: image,
