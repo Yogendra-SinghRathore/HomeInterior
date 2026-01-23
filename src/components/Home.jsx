@@ -166,7 +166,7 @@ useEffect(() => {
             ease: "cubic-bezier(0.77,0,0.175,1)",
             scrollTrigger: {
               trigger: image,
-              start: isMobile ? "top 60%" : "top 75%",
+              start: isMobile ? "top 50%" : "top 75%",
               once: true,
             },
           }
@@ -205,7 +205,7 @@ useEffect(() => {
           stagger: 0.045,
           scrollTrigger: {
             trigger: el,
-            start: isMobile ? "top 60%" : "top 75%",
+            start: isMobile ? "top 50%" : "top 75%",
             once: true,
           },
         });
