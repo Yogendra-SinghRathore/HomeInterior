@@ -194,7 +194,6 @@ useEffect(() => {
             trigger: el,
             start: isMobile ? "top 92%" : "top 80%", // 👈 KEY FIX
             once: true,
-            
           },
         });
       }
