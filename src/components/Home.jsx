@@ -220,25 +220,38 @@ const Home = () => {
     });
   }, []);
 
-  useEffect(() => {
-  const refresh = () => {
-    ScrollTrigger.refresh(true);
-  };
+useEffect(() => {
+  const counters = gsap.utils.toArray(".counterInnerBox h2");
 
-  // mobile browsers need extra delay
-  window.addEventListener("load", () => {
-    setTimeout(refresh, 300);
+  counters.forEach((counter) => {
+    const endValue = Number(counter.dataset.count);
+    const suffix = counter.dataset.suffix || "";
+
+    // 👇 start from middle (you can tweak the percentage)
+    const startValue = Math.floor(endValue * 0.45);
+
+    gsap.fromTo(
+      counter,
+      { innerText: startValue },
+      {
+        innerText: endValue,
+        duration: 3.8,
+        ease: "power3.out",
+        snap: { innerText: 1 },
+        scrollTrigger: {
+          trigger: counter,
+          start: "top 85%",
+          once: true,
+        },
+        onUpdate() {
+          counter.innerText =
+            Math.floor(counter.innerText) + suffix;
+        },
+      }
+    );
   });
-
-  window.addEventListener("orientationchange", () => {
-    setTimeout(refresh, 300);
-  });
-
-  return () => {
-    window.removeEventListener("load", refresh);
-    window.removeEventListener("orientationchange", refresh);
-  };
 }, []);
+
 
 
 
@@ -317,20 +330,23 @@ const Home = () => {
               <div className="col-lg-4 mt-2 mt-sm-5">
                 <div className="counterBox">
                   <div className="counterInnerBox">
-                    <h2>60M+</h2>
+                    <h2 data-count="60" data-suffix="M+">0</h2>
                     <span>Savings Money</span>
                   </div>
-                  <div className=" InnercounterBox">
+
+                  <div className="InnercounterBox">
                     <div className="counterInnerBox">
-                      <h2>10k+</h2>
+                      <h2 data-count="10" data-suffix="k+">0</h2>
                       <span>Global Clients</span>
                     </div>
+
                     <div className="counterInnerBox">
-                      <h2>98%</h2>
-                      <span>Clients statisfaction</span>
+                      <h2 data-count="98" data-suffix="%">0</h2>
+                      <span>Clients satisfaction</span>
                     </div>
                   </div>
                 </div>
+
               </div>
               <div className="col-lg-7">
                 <div className="counterSideImg">
