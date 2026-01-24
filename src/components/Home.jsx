@@ -220,6 +220,27 @@ const Home = () => {
     });
   }, []);
 
+  useEffect(() => {
+  const refresh = () => {
+    ScrollTrigger.refresh(true);
+  };
+
+  // mobile browsers need extra delay
+  window.addEventListener("load", () => {
+    setTimeout(refresh, 300);
+  });
+
+  window.addEventListener("orientationchange", () => {
+    setTimeout(refresh, 300);
+  });
+
+  return () => {
+    window.removeEventListener("load", refresh);
+    window.removeEventListener("orientationchange", refresh);
+  };
+}, []);
+
+
 
   return (
     <>

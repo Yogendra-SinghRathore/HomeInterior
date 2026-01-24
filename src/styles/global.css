@@ -302,7 +302,7 @@ img {
   font-size: 4em;
 }
 
-.primary-button{
+.primary-button {
   padding: 11px 24px;
   border: 1px solid #000;
   background: #000;
@@ -311,7 +311,8 @@ img {
   align-items: center;
   justify-content: center;
 }
-.secondry-button{
+
+.secondry-button {
   padding: 11px 24px;
   border: 1px solid #000;
   background: #fff;
@@ -320,16 +321,19 @@ img {
   align-items: center;
   justify-content: center;
 }
-.navbarBtn{
+
+.navbarBtn {
   padding: 11px 54px;
 }
-.primary-button:hover{
+
+.primary-button:hover {
   border: 1px solid #000;
   background: #fff;
   color: #000;
   transition: 0.5s ease-in-out;
 }
-.secondry-button:hover{
+
+.secondry-button:hover {
   border: 1px solid #000;
   background: #000;
   color: #fff;
@@ -438,7 +442,7 @@ img {
 .reveal-brush .word {
   display: inline-block;
   white-space: nowrap;
-  margin-right: 0.15em; 
+  margin-right: 0.15em;
 }
 
 .reveal-brush .char {
@@ -553,7 +557,7 @@ img {
 
   .section {
     padding: 20px 0;
-  }     
+  }
 
   .processBoxWrapper {
     margin-top: 45px;
@@ -581,16 +585,23 @@ img {
   .processBox img {
     width: 45px;
   }
-  .serviceDetails{
+
+  .serviceDetails {
     font-size: 14px;
   }
-  .counterBox{
+
+  .counterBox {
     padding: 20px;
+  }
+
+  .heroRightBox img{
+    height: 250px;
+    object-fit: cover;
   }
 }
 
 @media (max-width:375px) {
-  .counterBox{
+  .counterBox {
     padding: 0px;
   }
 }
