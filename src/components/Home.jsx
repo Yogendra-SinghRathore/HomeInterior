@@ -273,7 +273,7 @@ const Home = () => {
       items.forEach((item) => {
         gsap.from(item, {
           opacity: 0, // ✅ MUST be 0
-          x: isMobile ? 40 : 80,
+          y: isMobile ? 40 : 80,
           duration: 0.95,
           ease: "power3.out",
           delay: Number(item.dataset.delay) || 0,
