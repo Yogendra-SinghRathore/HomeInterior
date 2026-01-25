@@ -171,7 +171,7 @@ const Home = () => {
               ease: "power4.out",
               scrollTrigger: {
                 trigger: image,
-                start: isMobile ? "top 70%" : "top 80%",
+                start: isMobile ? "top 75%" : "top 80%",
                 once: true,
               },
             }
@@ -213,7 +213,7 @@ const Home = () => {
             stagger: 0.045,
             scrollTrigger: {
               trigger: el,
-              start: isMobile ? "top 60%" : "top 70%",
+              start: isMobile ? "top 70%" : "top 75%",
               once: true,
               invalidateOnRefresh: true,
             },
@@ -258,37 +258,38 @@ const Home = () => {
 
 
 
- useEffect(() => {
-  const mm = gsap.matchMedia();
-  const items = gsap.utils.toArray(".process-gsap");
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+    const items = gsap.utils.toArray(".process-gsap");
 
-  mm.add(
-    {
-      isMobile: "(max-width: 768px)",
-      isDesktop: "(min-width: 769px)",
-    },
-    (context) => {
-      const { isMobile } = context.conditions;
+    mm.add(
+      {
+        isMobile: "(max-width: 768px)",
+        isDesktop: "(min-width: 769px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions;
 
-      items.forEach((item) => {
-        gsap.from(item, {
-          opacity: 0, // ✅ MUST be 0
-          y: isMobile ? 40 : 80,
-          duration: 0.95,
-          ease: "power3.out",
-          delay: Number(item.dataset.delay) || 0,
-          scrollTrigger: {
-            trigger: item,
-            start: isMobile ? "top 55%" : "top 65%",
-            once: true,
-          },
+        items.forEach((item) => {
+          gsap.from(item, {
+            opacity: 0, // ✅ MUST be 0
+            x: isMobile ? 0 : 80,   // 👉 Desktop: move sideways
+            y: isMobile ? 40 : 0,   // 👉 Mobile: move upward
+            duration: 0.95,
+            ease: "power3.out",
+            delay: Number(item.dataset.delay) || 0,
+            scrollTrigger: {
+              trigger: item,
+              start: isMobile ? "top 55%" : "top 60%",
+              once: true,
+            },
+          });
         });
-      });
-    }
-  );
+      }
+    );
 
-  return () => mm.revert(); // 🔥 VERY IMPORTANT
-}, []);
+    return () => mm.revert(); // 🔥 VERY IMPORTANT
+  }, []);
 
 
   useEffect(() => {
