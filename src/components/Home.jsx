@@ -144,18 +144,19 @@ const Home = () => {
 
 
   useEffect(() => {
+    const mm = gsap.matchMedia();
     const images = gsap.utils.toArray(".reveal-image");
 
-    images.forEach((image) => {
-      const img = image.querySelector("img");
+    mm.add(
+      {
+        isMobile: "(max-width: 768px)",
+        isDesktop: "(min-width: 769px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions;
 
-      gsap.matchMedia().add(
-        {
-          isMobile: "(max-width: 768px)",
-          isDesktop: "(min-width: 769px)",
-        },
-        (context) => {
-          const { isMobile } = context.conditions;
+        images.forEach((image) => {
+          const img = image.querySelector("img");
 
           gsap.fromTo(
             img,
@@ -172,14 +173,16 @@ const Home = () => {
                 trigger: image,
                 start: isMobile ? "top 70%" : "top 80%",
                 once: true,
-                invalidateOnRefresh: true,
               },
             }
           );
-        }
-      );
-    });
+        });
+      }
+    );
+
+    return () => mm.revert(); // 🔥 CRITICAL
   }, []);
+
 
 
   useEffect(() => {
@@ -210,7 +213,7 @@ const Home = () => {
             stagger: 0.045,
             scrollTrigger: {
               trigger: el,
-              start: isMobile ? "top 65%" : "top 75%",
+              start: isMobile ? "top 60%" : "top 70%",
               once: true,
               invalidateOnRefresh: true,
             },
@@ -220,39 +223,107 @@ const Home = () => {
     });
   }, []);
 
-useEffect(() => {
-  const counters = gsap.utils.toArray(".counterInnerBox h2");
+  useEffect(() => {
+    const counters = gsap.utils.toArray(".counterInnerBox h2");
 
-  counters.forEach((counter, index) => {
-    const endValue = Number(counter.dataset.count);
-    const suffix = counter.dataset.suffix || "";
+    counters.forEach((counter, index) => {
+      const endValue = Number(counter.dataset.count);
+      const suffix = counter.dataset.suffix || "";
 
-    // 🎯 start close to end for premium feel
-    const startValue = Math.floor(endValue * 0.90);
+      // 🎯 start close to end for premium feel
+      const startValue = Math.floor(endValue * 0.90);
 
-    gsap.fromTo(
-      counter,
-      { innerText: startValue },
-      {
-        innerText: endValue,
-        duration: 3.6, // slightly longer = elegance
-        ease: "expo.out", // 👈 luxury easing
-        snap: { innerText: 1 },
-        delay: index * 0.12, // 👈 subtle stagger
-        scrollTrigger: {
-          trigger: counter,
-          start: "top 85%",
-          once: true,
-        },
-        onUpdate() {
-          const value = Math.floor(counter.innerText);
-          counter.innerText = value.toLocaleString() + suffix;
-        },
-      }
-    );
-  });
+      gsap.fromTo(
+        counter,
+        { innerText: startValue },
+        {
+          innerText: endValue,
+          duration: 3.6, // slightly longer = elegance
+          ease: "expo.out", // 👈 luxury easing
+          snap: { innerText: 1 },
+          delay: index * 0.12, // 👈 subtle stagger
+          scrollTrigger: {
+            trigger: counter,
+            start: "top 75%",
+            once: true,
+          },
+          onUpdate() {
+            const value = Math.floor(counter.innerText);
+            counter.innerText = value.toLocaleString() + suffix;
+          },
+        }
+      );
+    });
+  }, []);
+
+
+
+ useEffect(() => {
+  const mm = gsap.matchMedia();
+  const items = gsap.utils.toArray(".process-gsap");
+
+  mm.add(
+    {
+      isMobile: "(max-width: 768px)",
+      isDesktop: "(min-width: 769px)",
+    },
+    (context) => {
+      const { isMobile } = context.conditions;
+
+      items.forEach((item) => {
+        gsap.from(item, {
+          opacity: 0, // ✅ MUST be 0
+          x: isMobile ? 40 : 80,
+          duration: 0.95,
+          ease: "power3.out",
+          delay: Number(item.dataset.delay) || 0,
+          scrollTrigger: {
+            trigger: item,
+            start: isMobile ? "top 55%" : "top 65%",
+            once: true,
+          },
+        });
+      });
+    }
+  );
+
+  return () => mm.revert(); // 🔥 VERY IMPORTANT
 }, []);
 
+
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+    const elements = gsap.utils.toArray(".gsap-fade-up");
+
+    mm.add(
+      {
+        isMobile: "(max-width: 768px)",
+        isDesktop: "(min-width: 769px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions;
+
+        elements.forEach((el) => {
+          const children = Array.from(el.children); // ✅ static array
+
+          gsap.from(children, {
+            opacity: 0,
+            y: isMobile ? 30 : 50,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.12,
+            scrollTrigger: {
+              trigger: el,
+              start: isMobile ? "top 70%" : "top 80%",
+              once: true,
+            },
+          });
+        });
+      }
+    );
+
+    return () => mm.revert();
+  }, []);
 
 
 
@@ -267,7 +338,7 @@ useEffect(() => {
                 <div
                   className=" section-title-box"
                   data-aos="fade-down"
-                  data-aos-delay="500"
+                  data-aos-delay="400"
                 >
                   <div className="section-icon"></div>
                   <div className="section-title">
@@ -297,7 +368,7 @@ useEffect(() => {
                   />
                 </div>
 
-                <p className="mb-0" data-aos="fade-up" data-aos-delay="500">
+                <p className="mb-0" data-aos="fade-up" data-aos-delay="400">
                   Crafting interiors that showcase your individuality, elevate
                   your lifestyle, and infuse timeless beauty into every space.
                 </p>
@@ -315,13 +386,12 @@ useEffect(() => {
             <div className="liner-box"></div>
           </div>
           <div className="about-box about-inner-box">
-            <h2 className=" aboutDesc" data-aos="fade-up" data-aos-delay="1000">
+            <h2 className="aboutDesc gsap-fade-up">
               In 2010, a passionate team of designers founded Aurelo with a
               simple mission to transform bold visions into timeless
-              interiors.We’re known for more than just designing spaces. we
-              craft experiences that inspire, comfort, and endure."
+              interiors. We’re known for more than just designing spaces — we
+              craft experiences that inspire, comfort, and endure.
             </h2>
-
             <div>
               <NavLink to="/quote" className="primary-button aboutBtn">
                 Book Appoinment
@@ -397,16 +467,20 @@ useEffect(() => {
                 </div>
               </div>
               <div className="col-lg-7 mt-3">
-                <div className="serviceCardContentBox">
-                  <span className="serviceNumber" data-aos="fade-up" data-aos-delay="500">{service.number}</span>
-                  <h2 className="serviceHeading" data-aos="fade-up" data-aos-delay="600">{service.heading}</h2>
-                  <p className="serviceDetails " data-aos="fade-up" data-aos-delay="700">{service.desc}</p>
-                  <div className="serviceBtnBox" data-aos="fade-up" data-aos-delay="800">
+                <div className="serviceCardContentBox gsap-fade-up">
+                  <span className="serviceNumber">{service.number}</span>
+
+                  <h2 className="serviceHeading">{service.heading}</h2>
+
+                  <p className="serviceDetails">{service.desc}</p>
+
+                  <div className="serviceBtnBox">
                     <NavLink to="/quote" className="secondry-button serviceBtn">
                       Book Appoinment
                     </NavLink>
                   </div>
                 </div>
+
               </div>
             </div>
           ))}
@@ -475,11 +549,15 @@ useEffect(() => {
           </div>
 
           <div className="row g-0 processBoxWrapper">
-            {processData.map((process,index) => (
-              <div className="col-sm-6 col-md-4 col-lg-3" data-aos="fade-right" data-aos-delay={200 * (index + 1)}>
-                <div className=" processBox">
+            {processData.map((process, index) => (
+              <div
+                className="col-sm-6 col-md-4 col-lg-3 process-gsap"
+                data-delay={index * 0.2}
+                key={process.id}
+              >
+                <div className="processBox">
                   <img
-                    className=" img-fluid"
+                    className="img-fluid"
                     src={process.img}
                     alt="processImg"
                   />
@@ -491,6 +569,7 @@ useEffect(() => {
               </div>
             ))}
           </div>
+
         </div>
       </section>
 

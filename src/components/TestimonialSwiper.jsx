@@ -38,18 +38,19 @@ const TestimonialSlider = () => {
   ];
 
   useEffect(() => {
+    const mm = gsap.matchMedia();
     const images = gsap.utils.toArray(".reveal-image");
 
-    images.forEach((image) => {
-      const img = image.querySelector("img");
+    mm.add(
+      {
+        isMobile: "(max-width: 768px)",
+        isDesktop: "(min-width: 769px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions;
 
-      gsap.matchMedia().add(
-        {
-          isMobile: "(max-width: 768px)",
-          isDesktop: "(min-width: 769px)",
-        },
-        (context) => {
-          const { isMobile } = context.conditions;
+        images.forEach((image) => {
+          const img = image.querySelector("img");
 
           gsap.fromTo(
             img,
@@ -66,13 +67,14 @@ const TestimonialSlider = () => {
                 trigger: image,
                 start: isMobile ? "top 70%" : "top 80%",
                 once: true,
-                invalidateOnRefresh: true,
               },
             }
           );
-        }
-      );
-    });
+        });
+      }
+    );
+
+    return () => mm.revert(); // 🔥 CRITICAL
   }, []);
 
   return (
