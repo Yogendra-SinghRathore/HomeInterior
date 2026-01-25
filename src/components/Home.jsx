@@ -223,34 +223,36 @@ const Home = () => {
 useEffect(() => {
   const counters = gsap.utils.toArray(".counterInnerBox h2");
 
-  counters.forEach((counter) => {
+  counters.forEach((counter, index) => {
     const endValue = Number(counter.dataset.count);
     const suffix = counter.dataset.suffix || "";
 
-    // 👇 start from middle (you can tweak the percentage)
-    const startValue = Math.floor(endValue * 0.45);
+    // 🎯 start close to end for premium feel
+    const startValue = Math.floor(endValue * 0.90);
 
     gsap.fromTo(
       counter,
       { innerText: startValue },
       {
         innerText: endValue,
-        duration: 3.8,
-        ease: "power3.out",
+        duration: 3.6, // slightly longer = elegance
+        ease: "expo.out", // 👈 luxury easing
         snap: { innerText: 1 },
+        delay: index * 0.12, // 👈 subtle stagger
         scrollTrigger: {
           trigger: counter,
           start: "top 85%",
           once: true,
         },
         onUpdate() {
-          counter.innerText =
-            Math.floor(counter.innerText) + suffix;
+          const value = Math.floor(counter.innerText);
+          counter.innerText = value.toLocaleString() + suffix;
         },
       }
     );
   });
 }, []);
+
 
 
 
@@ -396,10 +398,10 @@ useEffect(() => {
               </div>
               <div className="col-lg-7 mt-3">
                 <div className="serviceCardContentBox">
-                  <span className="serviceNumber">{service.number}</span>
-                  <h2 className="serviceHeading">{service.heading}</h2>
-                  <p className="serviceDetails">{service.desc}</p>
-                  <div className="serviceBtnBox">
+                  <span className="serviceNumber" data-aos="fade-up" data-aos-delay="500">{service.number}</span>
+                  <h2 className="serviceHeading" data-aos="fade-up" data-aos-delay="600">{service.heading}</h2>
+                  <p className="serviceDetails " data-aos="fade-up" data-aos-delay="700">{service.desc}</p>
+                  <div className="serviceBtnBox" data-aos="fade-up" data-aos-delay="800">
                     <NavLink to="/quote" className="secondry-button serviceBtn">
                       Book Appoinment
                     </NavLink>
@@ -473,8 +475,8 @@ useEffect(() => {
           </div>
 
           <div className="row g-0 processBoxWrapper">
-            {processData.map((process) => (
-              <div className="col-sm-6 col-md-4 col-lg-3">
+            {processData.map((process,index) => (
+              <div className="col-sm-6 col-md-4 col-lg-3" data-aos="fade-right" data-aos-delay={200 * (index + 1)}>
                 <div className=" processBox">
                   <img
                     className=" img-fluid"
