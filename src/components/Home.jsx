@@ -171,7 +171,7 @@ const Home = () => {
               ease: "power4.out",
               scrollTrigger: {
                 trigger: image,
-                start: isMobile ? "top 75%" : "top 80%",
+                start: isMobile ? "top 65%" : "top 75%",
                 once: true,
               },
             }
@@ -213,7 +213,7 @@ const Home = () => {
             stagger: 0.045,
             scrollTrigger: {
               trigger: el,
-              start: isMobile ? "top 70%" : "top 75%",
+              start: isMobile ? "top 65%" : "top 75%",
               once: true,
               invalidateOnRefresh: true,
             },
@@ -244,7 +244,7 @@ const Home = () => {
           delay: index * 0.12, // 👈 subtle stagger
           scrollTrigger: {
             trigger: counter,
-            start: "top 75%",
+            start: "top 70%",
             once: true,
           },
           onUpdate() {
