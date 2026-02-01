@@ -14,6 +14,7 @@ const Navbar = () => {
     }
   };
 
+
   return (
     <nav className="navbar navbar-expand-lg fixed-top bg-white navbar-light mb-3">
       <div className="container bg-white navbarBorder">

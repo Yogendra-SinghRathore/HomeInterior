@@ -8,6 +8,7 @@ html {
   scroll-behavior: smooth;
 }
 
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -33,7 +34,7 @@ a {
 }
 
 .navbar {
-  padding-top: 16px;
+  padding-top: 10px;
   height: 75px;
 }
 
@@ -400,6 +401,15 @@ img {
   background-color: #000;
   color: #fff;
 }
+.testimonialCardImg{
+  border: 1px solid #ededed;
+}
+
+.testimonialCardImg img{
+  max-height: 450px;
+  object-fit: cover;
+  object-position: top;
+}
 
 .navbar-toggler {
   border: none;
@@ -473,6 +483,9 @@ img {
 
   .offerBox {
     padding: 60px 0 100px;
+  }
+  .navbar-brand{
+    padding-bottom: 10px;
   }
 }
 
@@ -604,5 +617,8 @@ img {
 @media (max-width:375px) {
   .counterBox {
     padding: 0px;
+  }
+  .section-title{
+    font-size: 11px;
   }
 }
