@@ -1,26 +1,49 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import Logo from "../assets/images/mainLogo.svg";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+  const handleSectionNav = (id) => {
+    closeNavbar();
+
+    if (location.pathname !== "/") {
+      navigate("/");
+
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+    } else {
+      const el = document.getElementById(id);
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
+  const closeNavbar = () => {
+    if (window.innerWidth >= 992) return; // desktop: do nothing
+
+    const navbar = document.getElementById("navbarScroll");
+    if (!navbar) return;
+
+    const bsCollapse =
+      window.bootstrap.Collapse.getInstance(navbar) ||
+      new window.bootstrap.Collapse(navbar, { toggle: false });
+
+    bsCollapse.hide();
+  };
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top bg-white navbar-light mb-3">
       <div className="container bg-white navbarBorder">
-
         {/* Logo */}
-        <NavLink className="navbar-brand fw-bold" to="/hero">
+        <NavLink
+          className="navbar-brand fw-bold"
+          to="/"
+          onClick={() => handleSectionNav("hero")}
+        >
           <img src={Logo} alt="brandLogo" />
         </NavLink>
 
@@ -39,19 +62,12 @@ const Navbar = () => {
 
         {/* Nav Content */}
         <div className="collapse navbar-collapse" id="navbarScroll">
-
-          {/* Center Nav Links */}
           <ul className="navbar-nav mx-auto my-2 my-lg-0">
-
             <li className="nav-item">
               <NavLink
                 to="/"
-                // onClick={() => scrollToSection("hero")}
-                // data-bs-toggle="collapse"
-                // data-bs-target="#navbarScroll"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
+                onClick={() => handleSectionNav("hero")}
+                className="nav-link"
               >
                 Home
               </NavLink>
@@ -59,13 +75,9 @@ const Navbar = () => {
 
             <li className="nav-item">
               <NavLink
-                to="/about"
-                onClick={() => scrollToSection("about")}
-                // data-bs-toggle="collapse"
-                data-bs-target="#navbarScroll"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
+                to="/"
+                onClick={() => handleSectionNav("about")}
+                className="nav-link"
               >
                 About
               </NavLink>
@@ -73,13 +85,9 @@ const Navbar = () => {
 
             <li className="nav-item">
               <NavLink
-                to="/service"
-                onClick={() => scrollToSection("service")}
-                // data-bs-toggle="collapse"
-                data-bs-target="#navbarScroll"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
+                to="/"
+                onClick={() => handleSectionNav("service")}
+                className="nav-link"
               >
                 Service
               </NavLink>
@@ -87,13 +95,9 @@ const Navbar = () => {
 
             <li className="nav-item">
               <NavLink
-                to="/project"
-                onClick={() => scrollToSection("project")}
-                // data-bs-toggle="collapse"
-                data-bs-target="#navbarScroll"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
+                to="/"
+                onClick={() => handleSectionNav("project")}
+                className="nav-link"
               >
                 Project
               </NavLink>
@@ -102,8 +106,7 @@ const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 to="/contact"
-                // data-bs-toggle="collapse"
-                // data-bs-target="#navbarScroll"
+                onClick={closeNavbar}
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
@@ -111,25 +114,20 @@ const Navbar = () => {
                 Contact
               </NavLink>
             </li>
-
           </ul>
 
           {/* Right CTA */}
-          <div className="">
+          <div>
             <NavLink
-              to="/quote"
+              to="/contact"
+              onClick={closeNavbar}
               className="primary-button navbarBtn"
-              // data-bs-toggle="collapse"
-              data-bs-target="#navbarScroll"
             >
               Get A Quote
             </NavLink>
           </div>
-
         </div>
-
-        
-        </div>
+      </div>
     </nav>
   );
 };

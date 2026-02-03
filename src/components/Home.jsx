@@ -394,7 +394,7 @@ const Home = () => {
               craft experiences that inspire, comfort, and endure.
             </h2>
             <div>
-              <NavLink to="/quote" className="primary-button aboutBtn">
+              <NavLink to="/contact" className="primary-button aboutBtn">
                 Book Appoinment
               </NavLink>
             </div>
@@ -450,7 +450,7 @@ const Home = () => {
               <h1 className="reveal-brush">Discover our interior design solutions.</h1>
             </div>
             <div className=" serviceBtnBox">
-              <NavLink to="/quote" className="primary-button">
+              <NavLink to="/contact" className="primary-button">
                 Book Appoinment
               </NavLink>
             </div>
@@ -476,7 +476,7 @@ const Home = () => {
                   <p className="serviceDetails">{service.desc}</p>
 
                   <div className="serviceBtnBox">
-                    <NavLink to="/quote" className="secondry-button serviceBtn">
+                    <NavLink to="/contact" className="secondry-button serviceBtn">
                       Book Appoinment
                     </NavLink>
                   </div>
@@ -501,7 +501,7 @@ const Home = () => {
               <h1 className="reveal-brush">A showcase of timeless interiors.</h1>
             </div>
             <div className=" serviceBtnBox">
-              <NavLink to="/quote" className="primary-button">
+              <NavLink to="/contact" className="primary-button">
                 Book Appoinment
               </NavLink>
             </div>
@@ -543,7 +543,7 @@ const Home = () => {
               <h1 className="reveal-brush">Where your vision and our expertise come together.</h1>
             </div>
             <div className=" serviceBtnBox">
-              <NavLink to="/quote" className="primary-button">
+              <NavLink to="/contact" className="primary-button">
                 Book Appoinment
               </NavLink>
             </div>
@@ -597,7 +597,7 @@ const Home = () => {
             <div className="container offerBoxText">
               <h1 className="reveal-brush">Ready to redefine your space? let’s talk</h1>
               <div className=" serviceBtnBox">
-                <NavLink to="/quote" className="secondry-button offerBoxBtn">
+                <NavLink to="/contact" className="secondry-button offerBoxBtn">
                   Book Appoinment
                 </NavLink>
               </div>
