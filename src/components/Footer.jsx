@@ -15,11 +15,11 @@ const Footer = () => {
     {
       heading: "Support page",
       links: [
-        { label: "Style guide", path: "/style" },
-        { label: "Change log", path: "/change" },
-        { label: "Pass Protect", path: "/pass" },
-        { label: "Licence", path: "/licence" },
-        { label: "404", path: "/404" },
+        { label: "Style guide", path: "#" },
+        { label: "Change log", path: "#" },
+        { label: "Pass Protect", path: "#" },
+        { label: "Licence", path: "#" },
+        { label: "404", path: "#" },
       ],
     },
     {

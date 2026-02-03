@@ -213,7 +213,7 @@ const Home = () => {
             stagger: 0.045,
             scrollTrigger: {
               trigger: el,
-              start: isMobile ? "top 65%" : "top 80%",
+              start: isMobile ? "top 65%" : "top 85%",
               once: true,
               invalidateOnRefresh: true,
             },
@@ -230,7 +230,7 @@ const Home = () => {
       const endValue = Number(counter.dataset.count);
       const suffix = counter.dataset.suffix || "";
 
-      // 🎯 start close to end for premium feel
+      // start close to end for premium feel
       const startValue = Math.floor(endValue * 0.90);
 
       gsap.fromTo(
@@ -239,12 +239,12 @@ const Home = () => {
         {
           innerText: endValue,
           duration: 3.6, // slightly longer = elegance
-          ease: "expo.out", // 👈 luxury easing
+          ease: "expo.out", // luxury easing
           snap: { innerText: 1 },
-          delay: index * 0.12, // 👈 subtle stagger
+          delay: index * 0.12, // subtle stagger
           scrollTrigger: {
             trigger: counter,
-            start: "top 75%",
+            start: "top 80%",
             once: true,
           },
           onUpdate() {
@@ -272,9 +272,9 @@ const Home = () => {
 
         items.forEach((item) => {
           gsap.from(item, {
-            opacity: 0, // ✅ MUST be 0
-            x: isMobile ? 0 : 80,   // 👉 Desktop: move sideways
-            y: isMobile ? 40 : 0,   // 👉 Mobile: move upward
+            opacity: 0, //  MUST be 0
+            x: isMobile ? 0 : 80,   // Desktop: move sideways
+            y: isMobile ? 40 : 0,   // Mobile: move upward
             duration: 0.95,
             ease: "power3.out",
             delay: Number(item.dataset.delay) || 0,
@@ -288,7 +288,7 @@ const Home = () => {
       }
     );
 
-    return () => mm.revert(); // 🔥 VERY IMPORTANT
+    return () => mm.revert(); //  VERY IMPORTANT
   }, []);
 
 
@@ -305,7 +305,7 @@ const Home = () => {
         const { isMobile } = context.conditions;
 
         elements.forEach((el) => {
-          const children = Array.from(el.children); // ✅ static array
+          const children = Array.from(el.children); //  static array
 
           gsap.from(children, {
             opacity: 0,

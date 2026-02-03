@@ -45,10 +45,10 @@ const Navbar = () => {
 
             <li className="nav-item">
               <NavLink
-                to="/hero"
-                onClick={() => scrollToSection("hero")}
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarScroll"
+                to="/"
+                // onClick={() => scrollToSection("hero")}
+                // data-bs-toggle="collapse"
+                // data-bs-target="#navbarScroll"
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
@@ -61,7 +61,7 @@ const Navbar = () => {
               <NavLink
                 to="/about"
                 onClick={() => scrollToSection("about")}
-                data-bs-toggle="collapse"
+                // data-bs-toggle="collapse"
                 data-bs-target="#navbarScroll"
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
@@ -75,7 +75,7 @@ const Navbar = () => {
               <NavLink
                 to="/service"
                 onClick={() => scrollToSection("service")}
-                data-bs-toggle="collapse"
+                // data-bs-toggle="collapse"
                 data-bs-target="#navbarScroll"
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
@@ -89,7 +89,7 @@ const Navbar = () => {
               <NavLink
                 to="/project"
                 onClick={() => scrollToSection("project")}
-                data-bs-toggle="collapse"
+                // data-bs-toggle="collapse"
                 data-bs-target="#navbarScroll"
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
@@ -102,8 +102,8 @@ const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 to="/contact"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarScroll"
+                // data-bs-toggle="collapse"
+                // data-bs-target="#navbarScroll"
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
@@ -119,7 +119,7 @@ const Navbar = () => {
             <NavLink
               to="/quote"
               className="primary-button navbarBtn"
-              data-bs-toggle="collapse"
+              // data-bs-toggle="collapse"
               data-bs-target="#navbarScroll"
             >
               Get A Quote

@@ -74,7 +74,7 @@ const TestimonialSlider = () => {
       }
     );
 
-    return () => mm.revert(); // 🔥 CRITICAL
+    return () => mm.revert();
   }, []);
 
   return (
@@ -128,8 +128,6 @@ const TestimonialSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* Custom Navigation Buttons */}
     </div>
   );
 };

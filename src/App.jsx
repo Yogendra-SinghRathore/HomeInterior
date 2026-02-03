@@ -4,6 +4,9 @@ import Navbar from "./components/Navbar"
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ContactUs from "./components/ContactUs";
+
 
 function App() {
 
@@ -18,9 +21,13 @@ function App() {
 
   return (
     <>
-      <Navbar/>
-      <Home/>
-      <Footer/>
+
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<ContactUs />} />
+      </Routes>
+      <Footer />
     </>
   )
 }
